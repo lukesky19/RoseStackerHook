@@ -1,6 +1,6 @@
 # RoseStackerHook Addon
 [![Discord](https://img.shields.io/discord/272499714048524288.svg?logo=discord)](https://discord.bentobox.world)
-[![Build Status](https://ci.codemc.io/buildStatus/icon?job=BONNePlayground/DragonFights)](https://ci.codemc.io/job/BONNePlayground/job/RoseStackerHook/)
+[![Build Status](https://ci.codemc.io/buildStatus/icon?job=BONNePlayground/RoseStackerHook)](https://ci.codemc.io/job/BONNePlayground/job/RoseStackerHook/)
 
 This is RoseStackerHook Addon for BentoBox plugin.  
 
