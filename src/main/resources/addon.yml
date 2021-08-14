@@ -1,0 +1,12 @@
+name: RoseStackerHook
+main: lv.id.bonne.rosestackerhook.RoseStackerHookAddon
+version: ${version}${build.number}
+api-version: ${bentobox.version}
+repository: 'BONNePlayground/RoseStackerHook'
+metrics: true
+icon: ROSE_BUSH
+
+authors:
+  - BONNe
+
+softdepend: AcidIsland, AOneBlock, BSkyBlock, CaveBlock, SkyGrid, Boxed

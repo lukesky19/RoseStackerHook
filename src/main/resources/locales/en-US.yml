@@ -1,0 +1,9 @@
+# Protection flags that are used in current addon.
+protection:
+  flags:
+    # This flag allows to switch which island member group can access go RoseStacker GUI.
+    ROSE_STACKER_GUI:
+      name: "RoseStacker GUI Permission"
+      description: |-
+        &a Select who can access
+        &a RoseStacker GUI.
