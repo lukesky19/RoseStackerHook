@@ -48,7 +48,7 @@ public class BlockInteractListener implements Listener
 
         Player player = event.getPlayer();
 
-        if (player.isSneaking())
+        if (!player.isSneaking())
         {
             // RoseStacker GUI opens only on sneaking. Weird.
             return;
