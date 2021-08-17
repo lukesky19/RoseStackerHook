@@ -11,11 +11,14 @@ This is RoseStackerHook Addon for BentoBox plugin.
 
 ## Configuration
 
-Addon has a single protection flag: ROSE_STACKER_GUI. It has Rose bush as icon under island settings.
+Addon has a protection flag: ROSE_STACKER_GUI. It has Rose bush as icon under island settings.
+This flag allows island owner to disable/enable access to Rose Stacker GUI when players shift+right-click on 
+the stacked block.
 
 ## Compatibility
 
 - [x] BentoBox 1.17
 - [x] Spigot 1.17
+- [x] [RoseStacker](https://github.com/Rosewood-Development/RoseStacker)
 
 Addon is not compatible with Older BentoBox and Spigot version. It requires Java 16+.

@@ -9,16 +9,16 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import dev.rosewood.rosestacker.api.RoseStackerAPI;
 import lv.id.bonne.rosestackerhook.RoseStackerHookAddon;
-import world.bentobox.bentobox.api.user.User;
+import world.bentobox.bentobox.api.flags.FlagListener;
 import world.bentobox.bentobox.util.Util;
 
 
 /**
- * This listener checks every player event and acts if event name is "HopperAccessEvent".
- * As EpicHoppers plugin is premium with hidden under protected repository, it is not
- * possible to use proper event class. Need to use this workaround.
+ * This listener checks every player interaction event and checks if player is shift+right-clicking
+ * on the stacked block. In such situation, it cancels interaction if player rank does not allow that,
+ * because it assumes that player will be able to see RoseStackerGUI.
  */
-public class BlockInteractListener implements Listener
+public class BlockInteractListener extends FlagListener
 {
     /**
      * Constructor HopperAccessListener creates a new HopperAccessListener instance.
@@ -32,7 +32,7 @@ public class BlockInteractListener implements Listener
 
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-    public void onHopperAccess(PlayerInteractEvent event)
+    public void onPlayerInteract(PlayerInteractEvent event)
     {
         if (event.getClickedBlock() == null)
         {
@@ -67,13 +67,8 @@ public class BlockInteractListener implements Listener
             return;
         }
 
-        if (!this.addon.getIslands().getIslandAt(player.getLocation()).
-            map(i -> i.isAllowed(User.getInstance(player), RoseStackerHookAddon.ROSE_STACKER_GUI)).
-            orElse(false))
-        {
-            // Player does not have access to the stacking GUI's.
-            event.setCancelled(true);
-        }
+        // Use BentoBox flag processing system to validate usage.
+        this.checkIsland(event, player, player.getLocation(), RoseStackerHookAddon.ROSE_STACKER_GUI);
     }
 
 
