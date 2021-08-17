@@ -68,7 +68,7 @@ public class BlockInteractListener extends FlagListener
         }
 
         // Use BentoBox flag processing system to validate usage.
-        this.checkIsland(event, player, player.getLocation(), RoseStackerHookAddon.ROSE_STACKER_GUI);
+        event.setCancelled(!this.checkIsland(event, player, player.getLocation(), RoseStackerHookAddon.ROSE_STACKER_GUI));
     }
 
 
