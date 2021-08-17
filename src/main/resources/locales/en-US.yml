@@ -7,3 +7,42 @@ protection:
       description: |-
         &a Select who can access
         &a RoseStacker GUI.
+      icon: ROSE_BUSH
+    # This is a parent flag for RoseStacker plugin.
+    ROSE_STACKER:
+      name: "RoseStacker"
+      description: |-
+        &a Toggles RoseStacker plugin.
+      icon: ROSE_BUSH
+    # This flag allows toggle block stacking on island.
+    ROSE_STACKER_BLOCKS:
+      name: "Block Stacking"
+      description: |-
+        &a Toggles block stacking
+        &a on this island.
+      hint: "Block stacking disabled"
+      icon: DIAMOND_BLOCK
+    # This flag allows toggle item stacking on island.
+    ROSE_STACKER_ITEMS:
+      name: "Item Stacking"
+      description: |-
+        &a Toggles item stacking
+        &a on this island.
+      hint: "Item stacking disabled"
+      icon: POPPY
+    # This flag allows toggle entity stacking on island.
+    ROSE_STACKER_ENTITIES:
+      name: "Entity Stacking"
+      description: |-
+        &a Toggles entity stacking
+        &a on this island.
+      hint: "Entity stacking disabled"
+      icon: SKELETON_SKULL
+    # This flag allows toggle spawner stacking on island.
+    ROSE_STACKER_SPAWNERS:
+      name: "Spawner Stacking"
+      description: |-
+        &a Toggles spawner stacking
+        &a on this island.
+      hint: "Spawner stacking disabled"
+      icon: SPAWNER

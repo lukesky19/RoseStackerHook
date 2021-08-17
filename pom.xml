@@ -49,7 +49,7 @@
 		<java.version>16</java.version>
 		<!-- More visible way how to change dependency versions -->
 		<spigot.version>1.17-R0.1-SNAPSHOT</spigot.version>
-		<bentobox.version>1.17.0</bentobox.version>
+		<bentobox.version>1.17.1</bentobox.version>
 		<rosestacker.version>1.3.0</rosestacker.version>
 		<!-- Revision variable removes warning about dynamic version -->
 		<revision>${build.version}-SNAPSHOT</revision>

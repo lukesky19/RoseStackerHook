@@ -2,6 +2,7 @@ package lv.id.bonne.rosestackerhook;
 
 import org.bukkit.Material;
 
+import lv.id.bonne.rosestackerhook.events.RoseStackerListener;
 import world.bentobox.bentobox.api.addons.Addon;
 import world.bentobox.bentobox.api.flags.Flag;
 import world.bentobox.bentobox.api.flags.clicklisteners.CycleClick;
@@ -48,8 +49,14 @@ public final class RoseStackerHookAddon extends Addon
         }
 
         // Register listener
-        this.registerListener(new BlockInteractListener(this));
+        this.registerListener(new BlockInteractListener());
+        this.registerListener(new RoseStackerListener());
         this.registerFlag(ROSE_STACKER_GUI);
+        this.registerFlag(ROSE_STACKER);
+        this.registerFlag(ROSE_STACKER_ENTITIES);
+        this.registerFlag(ROSE_STACKER_ITEMS);
+        this.registerFlag(ROSE_STACKER_BLOCKS);
+        this.registerFlag(ROSE_STACKER_SPAWNERS);
     }
 
 
@@ -72,5 +79,52 @@ public final class RoseStackerHookAddon extends Addon
             clickHandler(new CycleClick("ROSE_STACKER_GUI",
                 RanksManager.VISITOR_RANK,
                 RanksManager.OWNER_RANK)).
+            build();
+
+    /**
+     * This flag allows toggling block stacking.
+     */
+    public final static Flag ROSE_STACKER_BLOCKS =
+        new Flag.Builder("ROSE_STACKER_BLOCKS", Material.DIAMOND_BLOCK).
+            type(Flag.Type.SETTING).
+            defaultSetting(true).
+            build();
+
+    /**
+     * This flag allows toggling item stacking.
+     */
+    public final static Flag ROSE_STACKER_ITEMS =
+        new Flag.Builder("ROSE_STACKER_ITEMS", Material.POPPY).
+            type(Flag.Type.SETTING).
+            defaultSetting(true).
+            build();
+
+    /**
+     * This flag allows toggling entity stacking.
+     */
+    public final static Flag ROSE_STACKER_ENTITIES =
+        new Flag.Builder("ROSE_STACKER_ENTITIES", Material.SKELETON_SKULL).
+            type(Flag.Type.SETTING).
+            defaultSetting(true).
+            build();
+
+    /**
+     * This flag allows toggling spawner stacking.
+     */
+    public final static Flag ROSE_STACKER_SPAWNERS =
+        new Flag.Builder("ROSE_STACKER_SPAWNERS", Material.SPAWNER).
+            type(Flag.Type.SETTING).
+            defaultSetting(true).
+            build();
+
+    /**
+     * This flag allows toggling all stacking with one button.
+     */
+    public static final Flag ROSE_STACKER =
+        new Flag.Builder("ROSE_STACKER", Material.ROSE_BUSH).
+            mode(Flag.Mode.BASIC).
+            type(Flag.Type.SETTING).
+            defaultSetting(true).
+            subflags(ROSE_STACKER_BLOCKS, ROSE_STACKER_SPAWNERS, ROSE_STACKER_ENTITIES, ROSE_STACKER_ITEMS).
             build();
 }

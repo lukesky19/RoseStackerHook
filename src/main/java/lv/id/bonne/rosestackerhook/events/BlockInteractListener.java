@@ -2,15 +2,14 @@ package lv.id.bonne.rosestackerhook.events;
 
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.eclipse.jdt.annotation.NonNull;
 
 import dev.rosewood.rosestacker.api.RoseStackerAPI;
 import lv.id.bonne.rosestackerhook.RoseStackerHookAddon;
 import world.bentobox.bentobox.api.flags.FlagListener;
-import world.bentobox.bentobox.util.Util;
 
 
 /**
@@ -20,17 +19,6 @@ import world.bentobox.bentobox.util.Util;
  */
 public class BlockInteractListener extends FlagListener
 {
-    /**
-     * Constructor HopperAccessListener creates a new HopperAccessListener instance.
-     *
-     * @param addon of type EpicHooksAddon
-     */
-    public BlockInteractListener(@NonNull RoseStackerHookAddon addon)
-    {
-        this.addon = addon;
-    }
-
-
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onPlayerInteract(PlayerInteractEvent event)
     {
@@ -54,12 +42,6 @@ public class BlockInteractListener extends FlagListener
             return;
         }
 
-        if (!this.addon.getPlugin().getIWM().inWorld(Util.getWorld(player.getWorld())))
-        {
-            // Ignore non-bentobox worlds.
-            return;
-        }
-
         if (!RoseStackerAPI.getInstance().isBlockStacked(event.getClickedBlock()) &&
             !RoseStackerAPI.getInstance().isSpawnerStacked(event.getClickedBlock()))
         {
@@ -68,12 +50,7 @@ public class BlockInteractListener extends FlagListener
         }
 
         // Use BentoBox flag processing system to validate usage.
+        // Technically not necessary as internally it should be cancelled by BentoBox.
         event.setCancelled(!this.checkIsland(event, player, player.getLocation(), RoseStackerHookAddon.ROSE_STACKER_GUI));
     }
-
-
-    /**
-     * Current addon.
-     */
-    private final RoseStackerHookAddon addon;
 }
