@@ -4,7 +4,7 @@
 //
 
 
-package lv.id.bonne.rosestackerhook.events;
+package lv.id.bonne.rosestackerhook.listeners;
 
 
 import org.bukkit.event.EventHandler;

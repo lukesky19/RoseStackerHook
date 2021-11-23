@@ -2,12 +2,12 @@ package lv.id.bonne.rosestackerhook;
 
 import org.bukkit.Material;
 
-import lv.id.bonne.rosestackerhook.events.RoseStackerListener;
 import world.bentobox.bentobox.api.addons.Addon;
 import world.bentobox.bentobox.api.flags.Flag;
 import world.bentobox.bentobox.api.flags.clicklisteners.CycleClick;
 import world.bentobox.bentobox.managers.RanksManager;
-import lv.id.bonne.rosestackerhook.events.BlockInteractListener;
+import lv.id.bonne.rosestackerhook.listeners.RoseStackerListener;
+import lv.id.bonne.rosestackerhook.listeners.BlockInteractListener;
 
 
 /**
