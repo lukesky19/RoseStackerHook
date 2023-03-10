@@ -10,10 +10,7 @@ package lv.id.bonne.rosestackerhook.listeners;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 
-import dev.rosewood.rosestacker.event.BlockStackEvent;
-import dev.rosewood.rosestacker.event.EntityStackEvent;
-import dev.rosewood.rosestacker.event.ItemStackEvent;
-import dev.rosewood.rosestacker.event.SpawnerStackEvent;
+import dev.rosewood.rosestacker.event.*;
 import lv.id.bonne.rosestackerhook.RoseStackerHookAddon;
 import world.bentobox.bentobox.api.flags.FlagListener;
 
@@ -89,6 +86,25 @@ public class RoseStackerListener extends FlagListener
             RoseStackerHookAddon.ROSE_STACKER_SPAWNERS))
         {
             this.noGo(event, RoseStackerHookAddon.ROSE_STACKER_SPAWNERS);
+        }
+    }
+
+
+    /**
+     * Check if StackGUI can be opened.
+     *
+     * @param event the event
+     */
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    public void onGUIOpening(StackGUIOpenEvent event)
+    {
+        // Cancel stacking if ItemStacking is disabled in island settings.
+        if (!this.checkIsland(event,
+            event.getPlayer(),
+            event.getStack().getLocation(),
+            RoseStackerHookAddon.ROSE_STACKER_GUI))
+        {
+            this.noGo(event, RoseStackerHookAddon.ROSE_STACKER_GUI);
         }
     }
 }

@@ -7,7 +7,6 @@ import world.bentobox.bentobox.api.flags.Flag;
 import world.bentobox.bentobox.api.flags.clicklisteners.CycleClick;
 import world.bentobox.bentobox.managers.RanksManager;
 import lv.id.bonne.rosestackerhook.listeners.RoseStackerListener;
-import lv.id.bonne.rosestackerhook.listeners.BlockInteractListener;
 
 
 /**
@@ -49,7 +48,6 @@ public final class RoseStackerHookAddon extends Addon
         }
 
         // Register listener
-        this.registerListener(new BlockInteractListener());
         this.registerListener(new RoseStackerListener());
         this.registerFlag(ROSE_STACKER_GUI);
         this.registerFlag(ROSE_STACKER);
