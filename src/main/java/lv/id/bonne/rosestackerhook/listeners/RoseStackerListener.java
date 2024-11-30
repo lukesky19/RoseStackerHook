@@ -3,16 +3,25 @@
 // Copyright - 2021
 //
 
-
 package lv.id.bonne.rosestackerhook.listeners;
 
-
+import org.bukkit.Location;
+import org.bukkit.entity.Animals;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Monster;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 
 import dev.rosewood.rosestacker.event.*;
 import lv.id.bonne.rosestackerhook.RoseStackerHookAddon;
+import org.eclipse.jdt.annotation.NonNull;
+import org.jetbrains.annotations.NotNull;
+import world.bentobox.bentobox.BentoBox;
+import world.bentobox.bentobox.api.flags.Flag;
 import world.bentobox.bentobox.api.flags.FlagListener;
+import world.bentobox.bentobox.database.objects.Island;
+
+import java.util.Optional;
 
 
 /**
@@ -106,5 +115,66 @@ public class RoseStackerListener extends FlagListener
         {
             this.noGo(event, RoseStackerHookAddon.ROSE_STACKER_GUI);
         }
+    }
+
+    /**
+     * Check if monster or animal spawn flags are disabled and if so, cancel RoseStacker's SpawnerSpawnEvent.
+     *
+     * @param event the event
+     */
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    public void onSpawnerSpawn(PreStackedSpawnerSpawnEvent event)
+    {
+        Location spawnerLocation = event.getStack().getLocation();
+        Optional<Island> optionalIsland = BentoBox.getInstance().getIslandsManager().getIslandAt(spawnerLocation);
+
+        if (optionalIsland.isPresent())
+        {
+            Island island = optionalIsland.get();
+
+            @NonNull Optional<Flag> monsterSpawnersSpawnOptionalFlag = BentoBox.getInstance().getFlagsManager().getFlag("MONSTER_SPAWNERS_SPAWN");
+            @NonNull Optional<Flag> animalSpawnersSpawnOptionalFlag = BentoBox.getInstance().getFlagsManager().getFlag("ANIMAL_SPAWNERS_SPAWN");
+
+            if (monsterSpawnersSpawnOptionalFlag.isPresent())
+            {
+                Flag monsterSpawnersSpawnFlag = monsterSpawnersSpawnOptionalFlag.orElseThrow();
+
+                if (isHostile(event.getStack().getSpawner().getSpawnedType()))
+                {
+                    if (!island.isAllowed(monsterSpawnersSpawnFlag))
+                    {
+                        event.setCancelled(true);
+                        return;
+                    }
+                }
+            }
+
+            if (animalSpawnersSpawnOptionalFlag.isPresent())
+            {
+                Flag animalSpawnersSpawnFlag = animalSpawnersSpawnOptionalFlag.orElseThrow();
+
+                if (isPassive(event.getStack().getSpawner().getSpawnedType()))
+                {
+                    if (!island.isAllowed(animalSpawnersSpawnFlag))
+                    {
+                        event.setCancelled(true);
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean isHostile(@NotNull EntityType type)
+    {
+        if (type.getEntityClass() != null) return Monster.class.isAssignableFrom(type.getEntityClass());
+
+        return false;
+    }
+
+    private boolean isPassive(@NotNull EntityType type)
+    {
+        if(type.getEntityClass() != null) return Animals.class.isAssignableFrom(type.getEntityClass());
+
+        return false;
     }
 }
