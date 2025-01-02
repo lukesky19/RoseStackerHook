@@ -166,9 +166,9 @@ public class RoseStackerListener extends FlagListener
 
     private boolean isHostile(@NotNull EntityType type)
     {
-        if (type.getEntityClass() != null) return Monster.class.isAssignableFrom(type.getEntityClass());
+        if(type.getEntityClass() != null) return Monster.class.isAssignableFrom(type.getEntityClass());
 
-        return false;
+        return type.equals(EntityType.SLIME);
     }
 
     private boolean isPassive(@NotNull EntityType type)
